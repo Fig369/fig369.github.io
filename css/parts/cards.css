@@ -1,0 +1,40 @@
+.card {
+    height: auto;
+    background: var(--clr-3);
+    border-radius: 0.5rem;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        inset: -.6rem;
+        z-index: 1;
+        background: conic-gradient(from var(--gradient-angle),
+                var(--clr-1),
+                var(--clr-2),
+                var(--clr-3),
+                var(--clr-4),
+                var(--clr-5),
+                var(--clr-4),
+                var(--clr-3),
+                var(--clr-2),
+                var(--clr-1));
+        border-radius: inherit;
+        animation: rotation 3s linear infinite;
+    }
+
+    &::after {
+        filter: blur(1.3rem);
+    }
+
+    .card-content{
+        z-index: 10;
+    }
+
+    .card-content {
+        background-color: rgb(45, 45, 45);
+        color: white;
+        padding: 20px 20px;
+    }
+}

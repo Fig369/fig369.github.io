@@ -1,0 +1,50 @@
+h1 {
+    font-size: clamp(2rem, 5vw, 73px);
+    font-weight: 900;
+    margin-bottom: 16px;
+    color: #fff;
+}
+h1 span {
+    font-weight: normal;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 3vw, 34px);
+    line-height: 1.2em;
+    color: #007bff;
+    font-weight: 900;
+}
+h2 span {
+    font-weight: 700;
+    font-style: italic;
+}
+
+h3 {
+    font-size: clamp(1.25rem, 2.5vw, 27px);
+    color: #000;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: clamp(1.75rem, 3.5vw, 58px);
+    font-weight: 900;
+}
+
+h5 {
+    font-size: clamp(1.25rem, 2.5vw, 38px);
+    font-weight: 900;
+    color: #fff;
+}
+
+h6 {
+    font-size: clamp(1rem, 2vw, 28px);
+    font-weight: 900;
+    color: #fff;
+}
+
+p {
+    font-size: clamp(1rem, 1.5vw, 18px);
+    line-height: 1.4em;
+    font-weight: 500;
+    color: #000;
+}
