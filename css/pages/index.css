@@ -259,8 +259,8 @@
         }
 
         #projects {
-            img {
-                max-height: 350px;
+            img, .img-fluid {
+                max-height: 350px !important;
             }
             .project-card {
                 h3 {
