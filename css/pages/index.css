@@ -55,7 +55,7 @@
         }
     }
 
-    h2 {
+    h2, h3 {
         font-size: clamp(2.1rem, 3vw, 3rem);
         line-height: 1.4;
         font-family: 'Mr Dafoe';
@@ -254,6 +254,31 @@
                 p {
                     font-size: clamp(3rem, 5vw, 6rem);
                     ;
+                }
+            }
+        }
+
+        #projects {
+            img {
+                max-height: 350px;
+            }
+            .project-card {
+                h3 {
+                    font-size: clamp(2.1rem, 3vw, 3rem);
+                    line-height: 1.4;
+                    font-family: 'Mr Dafoe';
+                    color: white;
+                    text-shadow: 0 0 0.05em #fff, 0 0 0.1em #fe05e1, 0 0 0.2em #fe05e1;
+                    /* transform: rotate(-7deg); */
+                    /* position: relative;
+                    top: -22vh; */
+                }
+                a {
+                    text-decoration: none;
+                }
+                p {
+                    color: white;
+                    font-family: 'exo';
                 }
             }
         }
