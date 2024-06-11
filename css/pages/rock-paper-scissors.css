@@ -3,6 +3,17 @@
 body {
   background-image: repeating-linear-gradient(0deg, #B4DEEC, #B4DEEC 15px, #ddf0f6 15px, #ddf0f6 16px);
 }
+#section, footer {
+  margin: 0 auto;
+  padding: 10px;
+}
+
+section .container, footer .container {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  left: -10%;
+}
 
 #game-container {
   button {
@@ -35,12 +46,34 @@ body {
   }
 }
 
+#arcade-machine {
+  position: relative;
+  margin: 0 auto;
+  perspective: 42em;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+      width: 100%;
+    margin: 0 auto;
+    position: relative;
+    left: -10%;
+  }
+
+   & > div:nth-child(1) {
+    justify-content: center;
+    align-items: center;
+    }
+}
+
 .arcade-machine {
   height: 480px;
   width: 480px;
   position: relative;
   margin: 42px auto;
   perspective: 42em;
+  width: 100%;
+  margin: 0 auto;
 
   .top {
     height: 18%;
