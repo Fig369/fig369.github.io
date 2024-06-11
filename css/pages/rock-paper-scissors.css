@@ -2,6 +2,7 @@
 
 body {
   background-image: repeating-linear-gradient(0deg, #B4DEEC, #B4DEEC 15px, #ddf0f6 15px, #ddf0f6 16px);
+  overflow-x: hidden;
 }
 #section, footer {
   margin: 0 auto;
