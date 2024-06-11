@@ -253,7 +253,6 @@
 
                 p {
                     font-size: clamp(3rem, 5vw, 6rem);
-                    ;
                 }
             }
         }
@@ -287,6 +286,7 @@
                     color: white;
                     font-family: 'exo';
                     text-decoration: none !important;
+                    font-size: 15px;
                 }
             }
         }
