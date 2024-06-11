@@ -57,7 +57,7 @@ section .container, footer .container {
       width: 100%;
     margin: 0 auto;
     position: relative;
-    left: -10%;
+    /* left: -10%; */
   }
 
    & > div:nth-child(1) {
@@ -67,13 +67,24 @@ section .container, footer .container {
 }
 
 .arcade-machine {
-  height: 480px;
+  /* height: 480px;
   width: 480px;
   position: relative;
   margin: 42px auto;
   perspective: 42em;
   width: 100%;
+  margin: 0 auto; */
+  
+  height: 480px;
+  max-width: 480px;
+  position: relative;
+  margin: 42px auto;
+  perspective: 42em;
+  width: 100%;
   margin: 0 auto;
+  position: relative;
+  top: 0%;
+  left: 7%;
 
   .top {
     height: 18%;
