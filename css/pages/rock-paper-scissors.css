@@ -64,6 +64,12 @@ section .container, footer .container {
     justify-content: center;
     align-items: center;
     }
+
+    #result {
+      p {
+        font-size: 13px;
+      }
+    }
 }
 
 .arcade-machine {
