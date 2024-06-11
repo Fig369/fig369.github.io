@@ -386,6 +386,7 @@ section .container, footer .container {
     p {
       font-size: 16px !important;
       color: #fff;
+      margin-bottom: 1.5px;
     }
   }
 }
