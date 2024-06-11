@@ -1,5 +1,75 @@
-/* More styles for your project */
+@import url("https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@900&display=swap");
+:root {
+    /* Colors */
+    --primary-color: #007bff;
+    --font-size: 16px;
+    --bg: #f9124f;
+    --white: #FFFFFF;
+    --white-opacity: #ffffffd6;
+    --black: #212121;
+    --gray-lighter: #F9F9F9;
+    --gray-light: #F3F3F3;
+    --gray: #898A8D;
+    --gray-dark: #707070;
+    --blue: #007481;
+    --blue-light: #95D4E9;
+    --green: #4C9C2E;
+    --orange: #F88D2A;
+    --blue-opacity: #95d4e99f;
+    --blue-opacity-extra: #95d4e93b;
 
+    --text: var(--black);
+    --accent: var(--orange);
+
+    /* Type */
+    --sans: 'aauxpro_ot', sans-serif;
+    --serif: 'Cardo', serif;
+    --primary: var(--sans);
+
+    /* Other vars */
+    --transition: all 0.3s;
+    --box-shadow: 3px 6px 13px rgba(0, 0, 0, 0.3);
+    --ease-out: cubic-bezier(0.19, 1, 0.12, 1);
+    --ease-out-extreme: cubic-bezier(0.13, 0.9, 0.13, 1);
+    --ease-in-out: cubic-bezier(0.70, 0, 0.18, 1);
+    --radius: 13rem;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+}
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+input, button, textarea, select {
+    font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+p{
+    max-width: 70ch;
+    /* text-wrap: pretty; */
+}
+#root, #__next {
+    isolation: isolate;
+}
+
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* Body Content */ 
 html,
 body {
     font-size: 16px;
@@ -13,6 +83,57 @@ body {
     height: 100%;
     margin: 0;
     overflow-x: hidden;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 73px);
+    font-weight: 900;
+    margin-bottom: 16px;
+    color: #fff;
+}
+h1 span {
+    font-weight: normal;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 3vw, 34px);
+    line-height: 1.2em;
+    color: #007bff;
+    font-weight: 900;
+}
+h2 span {
+    font-weight: 700;
+    font-style: italic;
+}
+
+h3 {
+    font-size: clamp(1.25rem, 2.5vw, 27px);
+    color: #000;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: clamp(1.75rem, 3.5vw, 58px);
+    font-weight: 900;
+}
+
+h5 {
+    font-size: clamp(1.25rem, 2.5vw, 38px);
+    font-weight: 900;
+    color: #fff;
+}
+
+h6 {
+    font-size: clamp(1rem, 2vw, 28px);
+    font-weight: 900;
+    color: #fff;
+}
+
+p {
+    font-size: clamp(1rem, 1.5vw, 18px);
+    line-height: 1.4em;
+    font-weight: 500;
+    color: #000;
 }
 
 
@@ -57,6 +178,254 @@ footer .container {
 
 .bg-transparent {
     background-color: transparent !important;
+}
+
+.card {
+    height: auto;
+    background: var(--clr-3);
+    border-radius: 0.5rem;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        inset: -.6rem;
+        z-index: 1;
+        background: conic-gradient(from var(--gradient-angle),
+                var(--clr-1),
+                var(--clr-2),
+                var(--clr-3),
+                var(--clr-4),
+                var(--clr-5),
+                var(--clr-4),
+                var(--clr-3),
+                var(--clr-2),
+                var(--clr-1));
+        border-radius: inherit;
+        animation: rotation 3s linear infinite;
+    }
+
+    &::after {
+        filter: blur(1.3rem);
+    }
+
+    .card-content{
+        z-index: 10;
+    }
+
+    .card-content {
+        background-color: rgb(45, 45, 45);
+        color: white;
+        padding: 20px 20px;
+    }
+}
+
+/* Nav */
+nav {
+    position: absolute;
+    z-index: 100;
+    padding: 10px 20px;
+    margin: 0px auto;
+
+
+    .navbar {
+        position: absolute;
+    }
+
+    .nav-link {
+        text-align: right;
+    }
+
+    .navbar-nav:has(.show) {
+        align-items: end;
+    }
+
+    .navbar-toggler {
+        background-color: #59c1fe;
+        margin-right: 20px;
+    }
+
+    .navbar-toggler-icon {
+        background-image: none !important;
+        background-color: var(--bs-gray-800);
+        height: 3px;
+        width: 25px;
+        margin: 10px 0;
+        position: relative;
+        transition: all 0.35s ease-out;
+        transform-origin: center;
+    }
+
+    .navbar-toggler-icon::before {
+        display: block;
+        background-color: var(--bs-gray-800);
+        height: 3px;
+        content: "";
+        position: relative;
+        top: -7px;
+        transition: all 0.15s ease-out;
+        /*taken down to hide quicker*/
+        transform-origin: center;
+    }
+
+    .navbar-toggler-icon::after {
+        display: block;
+        background-color: var(--bs-gray-800);
+        height: 3px;
+        content: "";
+        position: relative;
+        top: 4px;
+        transition: all 0.35s ease-out;
+        transform-origin: center;
+    }
+
+    .navbar-dark .navbar-toggler-icon,
+    .navbar-dark .navbar-toggler-icon::before,
+    .navbar-dark .navbar-toggler-icon::after {
+        background-color: var(--bs-gray-100);
+    }
+
+    .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+        transform: rotate(45deg);
+    }
+
+    .navbar-toggler:not(.collapsed) .navbar-toggler-icon::before {
+        opacity: 0;
+    }
+
+    .navbar-toggler:not(.collapsed) .navbar-toggler-icon::after {
+        transform: rotate(-90deg) translateX(7px);
+    }
+
+    .navbar-collapse.collapsing {
+        transition-property: height, visibility;
+        transition-duration: 0s;
+    }
+
+    .navbar-toggler,
+    .navbar-toggler:active,
+    .navbar-toggler:focus {
+        box-shadow: none;
+        border: none;
+        outline: none;
+    }
+
+    .navbar-scrolled {
+        background-color: #333 !important;
+        /* Change to your desired background color */
+        transition: background-color 0.3s ease;
+        /* Smooth transition */
+    }
+
+    a {
+        color: #fff !important;
+        text-shadow: 0 0 0.05em #fff, 0 0 0.2em #fe05e1, 0 0 0.3em #fe05e1;
+        text-decoration: none;
+        margin-left: 20px;
+
+        &:hover {
+            color: var(--clr-2);
+        }
+    }
+}
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-10rem);
+    }
+    80% {
+        transform: translateX(1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+    80% {
+        transform: translateX(-1rem);
+    } 
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 991px) {
+
+    nav {
+        #navbar {
+            padding: 0;
+            position: fixed;
+            width: 100%;
+        }
+
+        .container-fluid {
+            width: 50%;
+        }
+
+        .bg-transparent {
+            background-color: #fff !important;
+        }
+
+        .container-fluid {
+            padding: 0;
+        }
+
+        .navbar-nav {
+            justify-content: end;
+            align-items: end;
+            position: fixed;
+        }
+
+        .nav-link {
+            max-width: 150px;
+            width: 100%;
+            /* background-color: #59c1fe; */
+            padding: 10px;
+        }
+
+        #navbarNavAltMarkup {
+            background-color: #59c1fe;
+
+        }
+
+        .navbar-collapse {
+            --navbar-height: 80px;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: end;
+            height: calc(50vh - var(--navbar-height));
+            background-color: #59c1fe;
+            padding-right: 30px;
+            /* transition: all 10ms ease-in-out; */
+        }
+    }
+}
+
+@media (max-width: 767px) {
+
+    #page-content section,
+    #page-footer {
+        padding: 20px;
+    }
 }
 
 @media (min-width: 992px) {
