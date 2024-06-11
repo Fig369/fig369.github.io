@@ -377,6 +377,30 @@ section .container, footer .container {
     }
   }
 
+  #score:first-child {
+    color: green;
+    font-weight: bold;
+    p {
+      font-size: 16px !important;
+      color: #fff;
+      margin-bottom: 3.69px;
+      color: green;
+      font-weight: bold;
+    }
+  }
+  #score:last-child {
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+    p {
+      font-size: 16px !important;
+      color: #fff;
+      margin-bottom: 3.69px;
+      color: red;
+      font-weight: bold;
+      font-style: italic;
+    }
+  }
 
 
   #game-ready {
@@ -389,17 +413,7 @@ section .container, footer .container {
       color: #fff;
       margin-bottom: 3.69px;
     }
-    #result {
-      #score:first-child {
-        color: green;
-        font-weight: bold;
-      }
-      #score:last-child {
-        color: red;
-        font-weight: bold;
-        font-style: italic;
-      }
-    }
+   
   }
 }
 
