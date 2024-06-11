@@ -388,6 +388,17 @@ section .container, footer .container {
       color: #fff;
       margin-bottom: 3.69px;
     }
+    #result {
+      #score:first-child {
+        color: green;
+        font-weight: bold;
+      }
+      #score:last-child {
+        color: red;
+        font-weight: bold;
+        font-style: italic;
+      }
+    }
   }
 }
 
