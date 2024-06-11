@@ -258,7 +258,7 @@
             }
         }
 
-        #projects {
+        #project {
             img, .img-fluid {
                 max-height: 350px !important;
             }
