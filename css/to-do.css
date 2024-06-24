@@ -12,6 +12,23 @@
 
 #body-wrapper {
 
+    section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: .5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .container-responsive {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0.5rem;
+    }
+
     #hero-header {
         position: relative;
         display: flex;
@@ -22,7 +39,7 @@
 
 
         h1 {
-            font-size: clamp(2rem, 5vw, 5rem);
+            font-size: clamp(2.8rem, 6vw, 10rem);
             position: relative;
             font-family: 'Exo';
             transform: skew(-15deg);
@@ -119,7 +136,7 @@
         }
 
         h2 {
-            font-size: clamp(1.8rem, 2vw, 2rem);
+            font-size: clamp(2rem, 4vw, 4rem);
             line-height: 1;
             font-family: 'Mr Dafoe';
             color: white;
