@@ -1,0 +1,238 @@
+#body-wrapper {
+
+    #back-button {
+        position: relative;
+        top: 20px;
+        left: 20px;
+    }
+
+   #header-hero {
+        * { 
+            color: #fff;
+            text-transform: capitalize;
+            font-family: 'Roboto', sans-serif;
+        }
+        .col-12 {
+            text-align: center;
+            width: 100%;
+            padding: 0rem;
+            margin: 0 auto;
+            word-wrap: break-word;
+            text-wrap: text-balance;
+        }
+   }
+
+    #to-do-container {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+
+        .text-decoration-line-through {
+            text-decoration: line-through;
+            color: rgb(255 1 1) !important;
+            
+            &:has(.fa-delete-left) {
+                color: #fff;
+                text-transform: capitalize;
+                transition: all 0.3s ease-in-out;
+                border: 1px solid rgb(255, 0, 0, 1) !important;
+                box-shadow: 0px 0px 10px 6px rgb(164, 0, 0, .3), 0px 0px 3px 1px rgb(164, 0, 0, .9) inset !important;
+            }
+
+            .btn-close {
+                display: block !important;
+                background: rgb(255, 0, 0, 1);
+                color: #fff;
+                font-weight: 600;
+                border: none;
+                border-radius: 0.2rem 0rem 0rem 0.2rem;
+                /* padding: 0rem 1rem 0em; */
+                height: auto;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                -webkit-border-radius: 0.2rem 0rem 0rem 0.2rem;
+                -moz-border-radius: 0.2rem 0rem 0rem 0.2rem;
+                -ms-border-radius: 0.2rem 0rem 0rem 0.2rem;
+                -o-border-radius: 0.2rem 0rem 0rem 0.2rem;
+
+                &:hover {
+                    -webkit-border-radius: 0.5rem;
+                    -moz-border-radius: 0.5rem;
+                    -ms-border-radius: 0.5rem;
+                    -o-border-radius: 0.5rem;
+                    background: red;
+                    color: ghostwhite;
+                    transform: scale(1.15);
+                    -webkit-transform: scale(1.15);
+                    -moz-transform: scale(1.15);
+                    -ms-transform: scale(1.15);
+                    -o-transform: scale(1.15);
+                }
+                i {
+                    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+                    line-height: 1.2rem;
+                }
+            }
+
+
+    
+            .btn-edit {
+                display: none !important;
+            }
+        }
+
+        button {
+
+            &.btn {
+                font-weight: 600;
+                border: none;
+                border-radius: 0.2rem 0rem 0rem 0.2rem;
+                padding: 0.5rem 1rem;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {   
+                    radius: 0.5rem;
+                    i {
+                        transform: scale(1.5);
+                        -webkit-transform: scale(1.5);
+                        -moz-transform: scale(1.5);
+                        -ms-transform: scale(1.5);
+                        -o-transform: scale(1.5);
+                    }
+                }
+            }
+
+            &.btn-close {
+                display: none !important;
+            }
+
+            &.btn-edit {
+                display: block !important;
+                background: rgba(255, 213, 0, 0.65);
+                border: none;
+                color: #fff;
+                radius: 0.2rem 0rem 0rem 0.2rem;
+
+                &:hover {
+                        background: green;
+                        color: ghostwhite;
+                }
+            }
+        }
+
+        .input-group {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+
+            input {
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 0.5rem;
+                font-size: clamp(1rem, 1.5vw, 1.5rem);
+                font-weight: 600;
+                width: 100%;
+                transition: all 0.3s ease-in-out;
+            }
+
+            button {
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 0.5rem;
+                background: #4d1784;
+                color: #fff;
+                font-size: clamp(1rem, 1.5vw, 1.5rem);
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    background: #4d1784;
+                    transform: scale(1.1);
+                    -webkit-transform: scale(1.1);
+                    -moz-transform: scale(1.1);
+                    -ms-transform: scale(1.1);
+                    -o-transform: scale(1.1);
+}
+            }
+        }
+
+        #task-list:has(.to-do-item) {
+            margin-block: .5rem;
+            padding: 1rem;
+            width: 100%;
+            max-width: 1200px;
+            border-radius: 0.3rem .3em 0.3em .3em;
+            /* background: rgba(255, 204, 0, 0.1); */
+            border: 1px solid rgba(255, 204, 0, 0.1);
+            box-shadow: 0 0px 6px 3px rgba(255, 255, 255, 0.1) inset;
+            color: #fff;
+            text-transform: capitalize;
+            transition: all 0.3s ease-in-out;
+            -webkit-border-radius: 0.3rem .3em 0.3em .3em;
+            -moz-border-radius: 0.3rem .3em 0.3em .3em;
+            -ms-border-radius: 0.3rem .3em 0.3em .3em;
+            -o-border-radius: 0.3rem .3em 0.3em .3em;
+}
+    }
+
+    .to-do-item {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        align-items: center;
+        margin-block: 2rem;
+        overflow: hidden;
+        border: 1px solid rgba(255, 213, 0, 0.65);
+        box-shadow:0 9px 6px 3px rgba(0, 0, 0, 0.35);
+
+
+
+        .task-text {
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            font-weight: 600;
+            min-height: 40px !important;
+            height: 100%;
+            width: 80%;
+            text-wrap: text-balance;
+            word-wrap: break-word;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+            margin-inline: .2em;
+            padding: .3em;
+            -webkit-transition: all 0.1s ease-in-out;
+            -moz-transition: all 0.1s ease-in-out;
+            -ms-transition: all 0.1s ease-in-out;
+            -o-transition: all 0.1s ease-in-out;
+        }
+    }
+
+    .alert.alert-success.alert-dismissible.fade.show {
+        background: rgba(77, 23, 132, 0.179);
+        color: #fff;
+        text-transform: capitalize;
+    }
+
+    .alert-dismissible {
+        padding: 0rem;
+
+        .btn-close {
+            position: relative !important;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            opacity: 1;
+            font-weight: 600;
+            
+        }
+    }
+
+    .text-decoration-line-through:has(button) {
+        background-color: white !important;
+    }
+
+
+}

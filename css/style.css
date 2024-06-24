@@ -450,3 +450,114 @@ nav {
 
 /* Extra small devices (portrait phones, less than 576px) */
 /* @media (max-width: 575.98px) { ... } */
+
+
+
+:root {
+    --clr-1: #fe05e1;
+    --clr-2: #b967ff;
+    --clr-3: #fffb96;
+    --clr-4: #01cdfe;
+    --clr-5: #05ffa1;
+    --clr-6: #480c5f;
+    --bg: #f9124f;
+    --font-size: 16px;
+}
+
+/* Body Content */
+#body-wrapper {
+    margin: 0 auto;
+    background: radial-gradient(rgba(118, 0, 191, 0.5) 25%, transparent 100%), linear-gradient(#0b161e 40%, #202076 80%);
+    color: white;
+    overflow-x: hidden;
+}
+
+
+/* Responsive  */
+@media (max-width: 1024px) {}
+
+@media (min-width: 992px) {
+    #time {
+        #mobile-card {
+            display: none;
+        }
+    }
+
+    @keyframes gradient-animation {
+        0% {
+            background-position: 0% 0%;
+        }
+
+        100% {
+            background-position: 100% 100%;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+
+    #time {
+        #mobile-card {
+            display: block !important;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+
+            .card-content {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+
+        .card-container {
+            display: none !important;
+        }
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    #hero-header {
+        #sun {
+            inline-size: min(400px, calc(250px + 10vw));
+            /* Gradually decrease size as viewport width increases */
+        }
+    }
+}
+
+@media (max-width: 767px) {
+
+    #time {
+
+        #mobile-card {
+            /* display: block !important;
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%; */
+
+            .card-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                gap: 50px;
+            }
+        }
+
+        .card-time {
+            max-width: 320px !important;
+            width: 100%;
+            margin: 30px auto;
+
+            h2 {
+                font-size: 60px !important;
+            }
+
+            p {
+                font-size: 60px !important;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {}
