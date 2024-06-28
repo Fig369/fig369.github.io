@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Operations Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages/main.css">
+</head>
+<body>
+
+<!-- Main Content -->
+<main class="container">
+    <!-- Header Section -->
+    <header>
+        <h1>Math Operations Calculator</h1>
+    </header>
+
+    
+    <!-- Results Section -->
+    <section id="results" class="container">
+        <!-- Results will be displayed here -->
+    </section>
+    
+    <!-- Operation Section -->
+    <section id="operation" class="m-4">
+        <!-- Dropdown to select operation -->
+        <div class="mb-3">
+            <label for="filter" class="form-label">Select Operation:</label>
+            <select id="filter" class="form-select">
+                <option value="range">Range</option>
+                <option value="sum">Sum</option>
+                <option value="fibonacci">Fibonacci</option>
+                <option value="reverseArray">Reverse Array</option>
+                <option value="reverseArrayInPlace">Reverse Array In Place</option>
+                <option value="deepEqual">Deep Equal</option>
+                <option value="arrayToList">Array to List</option>
+            </select>
+        </div>
+
+        <!-- Input fields for X and Y -->
+        <div id="inputFields" class="mb-3"></div>
+
+        <!-- Add Input button for array functions -->
+        <button id="addInput" class="btn btn-secondary mb-3" style="display: none;">Add Input</button>
+
+        <!-- Submit button -->
+        <button id="submit" class="btn btn-primary">Calculate</button>
+    </section>
+
+</main>
+
+<!-- Footer Section -->
+<footer class="bg-light text-center py-3">
+    © 2024 Math Operations Calculator. All rights reserved.
+</footer>
+
+<!-- Bootstrap JS Bundle (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Your custom JavaScript -->
+<script src="../js/mathCalculator.js"></script>
