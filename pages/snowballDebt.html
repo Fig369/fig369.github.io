@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Management Calculator</title>
+    <link rel="stylesheet" href="../css/snowball.css">
+</head>
+<body>
+    <h1>Debt Management Calculator</h1>
+
+    <div>
+        <h2>Your Household Income</h2>
+        <input type="number" id="householdIncome" placeholder="0">
+    </div>
+
+    <!-- <div>
+        <h2>Additional Payment</h2>
+        <input type="number" id="additionalPayment" placeholder="0">
+    </div> -->
+
+    <table id="debtTable">
+        <thead>
+            <tr>
+                <th>Debt Type</th>
+                <th>Interest Rate (%)</th>
+                <th>Balance ($)</th>
+                <th>Minimum Payment ($)</th>
+                <th>Due Date Day</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+        <div class="text-end">
+            <button class="save-all-button" onclick="saveAllInputs()">Save All</button>
+            <button class="add-debt-button" onclick="addDebtRow()">Add Debt</button>
+        </div>
+    </table>
+    <div class="snowball-order">
+        <h2>Debt Payoff Order (Snowball Method)</h2>
+        <ol id="debtSnowballOrder"></ol>
+    </div>
+
+    <script>
+        // Initialize debt data if not present in localStorage
+        var debtData = JSON.parse(localStorage.getItem("debtManagementData")) || {
+            debts: [],
+            householdIncome: 0,
+            additionalPayment: 0
+        };
+
+        // Function to save all form inputs to local storage and update results
+        function saveAllInputs() {
+            updateDebtDataFromInputs();
+            // localStorage.setItem("debtManagementData", JSON.stringify(debtData));
+            calculateDebtPayoffOrder();
+            alert("All form inputs saved to local storage and results updated!");
+        }
+
+        // Function to update debt data from form inputs
+        function updateDebtDataFromInputs() {
+            var table = document.getElementById("debtTable");
+            debtData.debts = [];
+
+            for (var i = 1; i < table.rows.length; i++) {
+                var row = table.rows[i];
+                var debt = {
+                    debtType: row.cells[0].querySelector("input").value,
+                    interestRate: row.cells[1].querySelector("input").value,
+                    balance: row.cells[2].querySelector("input").value,
+                    minPayment: row.cells[3].querySelector("input").value,
+                    dueDate: row.cells[4].querySelector("input").value
+                };
+                debtData.debts.push(debt);
+            }
+
+            debtData.householdIncome = document.getElementById("householdIncome").value;
+            debtData.additionalPayment = document.getElementById("additionalPayment").value;
+        }
+
+        // Function to populate debt table from debtData
+        function populateDebtTable() {
+            var table = document.getElementById("debtTable").querySelector("tbody");
+            table.innerHTML = "";
+
+            debtData.debts.forEach(function(debt, index) {
+                var row = table.insertRow();
+                row.insertCell(0).innerHTML = `<input type="text" class="edit-input" value="${debt.debtType}">`;
+                row.insertCell(1).innerHTML = `<input type="number" class="edit-input" value="${debt.interestRate}" step="0.01">`;
+                row.insertCell(2).innerHTML = `<input type="number" class="edit-input" value="${debt.balance}" step="0.01">`;
+                row.insertCell(3).innerHTML = `<input type="number" class="edit-input" value="${debt.minPayment}" step="0.01">`;
+                row.insertCell(4).innerHTML = `<input type="text" class="edit-input" value="${debt.dueDate}">`;
+                row.insertCell(5).innerHTML = `<button onclick="editRow(${index})">Edit</button><button onclick="deleteRow(${index})">Delete</button>`;
+            });
+        }
+
+        // Function to add a new debt row to the table
+        function addDebtRow() {
+            var table = document.getElementById("debtTable").querySelector("tbody");
+            var row = table.insertRow();
+            var cellCount = table.rows[0].cells.length;
+
+            for (var i = 0; i < cellCount - 1; i++) {
+                var cell = row.insertCell(i);
+                var defaultValue = (i === 1 || i === 2 || i === 3) ? "0" : "";
+                cell.innerHTML = `<input type="${i === 1 || i === 2 || i === 3 ? 'number' : 'text'}" class="edit-input" value="${defaultValue}" step="0.01">`;
+            }
+            row.insertCell(cellCount - 1).innerHTML = `<input type="text" class="edit-input">`;
+            row.insertCell(cellCount).innerHTML = `<button onclick="saveRow(${debtData.debts.length})">Save</button>`;
+        }
+
+        // Function to edit a debt row
+        function editRow(index) {
+            var table = document.getElementById("debtTable").querySelector("tbody").rows[index];
+            var cells = table.cells;
+            for (var i = 0; i < cells.length - 1; i++) {
+                var input = cells[i].querySelector("input");
+                input.removeAttribute("readonly");
+            }
+            cells[cells.length - 1].innerHTML = `<button onclick="saveRow(${index})">Save</button>`;
+        }
+
+        // Function to save a debt row
+        function saveRow(index) {
+            var table = document.getElementById("debtTable").querySelector("tbody").rows[index];
+            var cells = table.cells;
+            for (var i = 0; i < cells.length - 1; i++) {
+                var input = cells[i].querySelector("input");
+                input.setAttribute("readonly", true);
+            }
+            cells[cells.length - 1].innerHTML = `<button onclick="editRow(${index})">Edit</button><button onclick="deleteRow(${index})">Delete</button>`;
+            saveAllInputs(); // Save all inputs after saving a row
+        }
+
+        // Function to delete a debt row
+        function deleteRow(index) {
+            debtData.debts.splice(index, 0);
+            saveAllInputs(); // Save all inputs after deleting a row
+        }
+
+        // Function to calculate and display debt payoff order
+        function calculateDebtPayoffOrder() {
+            var sortedDebts = debtData.debts.slice().sort(function(a, b) {
+                return a.balance - b.balance;
+            });
+
+            var orderList = document.getElementById("debtSnowballOrder");
+            orderList.innerHTML = "";
+
+            var totalInterestPaid = 0;
+            sortedDebts.forEach(function(debt) {
+                totalInterestPaid += (debt.balance * debt.interestRate / 100);
+            });
+
+            sortedDebts.forEach(function(debt, index) {
+                var listItem = document.createElement("li");
+                var payoffDate = calculatePayoffDate(debt.balance, debt.minPayment, debt.interestRate);
+                listItem.textContent = `${index + 1}. ${debt.debtType} - Payoff Date: ${payoffDate}, Total Interest Paid: $${totalInterestPaid.toFixed(2)}`;
+                orderList.appendChild(listItem);
+            });
+        }
+
+        // Function to calculate payoff date based on balance, minimum payment, and interest rate
+        function calculatePayoffDate(balance, minPayment, interestRate) {
+            var months = 0;
+            var currentBalance = balance;
+            while (currentBalance > 0) {
+                var interest = currentBalance * (interestRate / 100 / 12);
+                currentBalance = currentBalance + interest - minPayment;
+                months++;
+            }
+            var today = new Date();
+            var payoffDate = new Date(today.getFullYear(), today.getMonth() + months, today.getDate());
+            return `${payoffDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+        }
+
+        // Initialize the page
+        populateDebtTable();
+        document.getElementById("householdIncome").value = debtData.householdIncome;
+        document.getElementById("additionalPayment").value = debtData.additionalPayment;
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table, th, td {
+    border: 1px solid #ccc;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+.edit-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.edit-input[type="number"] {
+    text-align: right;
+}
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.action-buttons button {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+.add-debt-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+.add-debt-button:hover {
+    background-color: #45a049;
+}
+.edit-debt-button {
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+}
+.edit-debt-button:hover {
+    background-color: #ec971f;
+}
+.save-all-button {
+    background-color: #337ab7;
+    color: white;
+    border: none;
+}
+.save-all-button:hover {
+    background-color: #286090;
+}
+.snowball-order {
+    margin-top: 20px;
+}
