@@ -5,181 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Debt Management Calculator</title>
     <link rel="stylesheet" href="../css/snowball.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages/index.css">
+    <link rel="stylesheet" href="../css/pages/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Debt Management Calculator</h1>
+    <main>
+        <section id="header">
+            <div class="container-responsive">
+                <div class="col-12">
+                    <header>
+                        <h1>Debt Management Calculator</h1>
+                    </header>
+                </div>
+            </div>
+        </section>
+        <section id="App">
+            <div class="container-responsive">
+                <div class="row">
+                    <div class="display-flex">
+                        <h2>Your Household Income</h2>
+                        <div class="income-container">
+                            <input type="number" id="householdIncome" placeholder="30000" value="3000">
+                            <!-- <select id="pay-period">
+                                <option value="weekly">Weekly</option>
+                                <option value="bi-weekly">Bi-Weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="annually">Annually</option>
+                            </select> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <table id="debtTable">
+                        <thead>
+                            <tr>
+                                <th><label for="name-input">Name</label>
+                                    <input type="text" id="name-input" class="form-control name-input">
+                                </th>
+                                <th>
+                                    <label for="due-date-input">Due Date</label>
+                                    <input  type='date' id='due-date-input' class="form-control due-date-input" >
+                                </th>
+                                <th><label for="interest-rate-input">Interest Rate (%)</label>
+                                    <input type="number" id="interest-rate-input" class="form-control interest-rate-input" step="0.01">
+                                </th>
+                                <th><label for="balance-due-input">Balance Due</label>
+                                    <input type="number" id="balance-due-input" class="form-control balance-due-input" step="0.01">
+                                </th>
+                                <th><label for="minimum-payment-input">Minimum Payment ($)</label>
+                                    <input type="number" id="minimum-payment-input" class="form-control minimum-payment-input" step="0.01">
+                                </th>
+                                <th>
+                                    <button class="save-button btn btn-success" onclick="saveRow()">Save</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="debtTable-rows">
+                            <!-- Table rows will be dynamically added here -->
+                      
+                        </tbody>
+                        <tfoot id="tableSummary">
+                            <tr>
+                                <td>Remaining Income <span id="leftover"></span></td>
+                                <td></td>
+                                <td>Avg Interest % <span id="totalInterestRate"></span></td>
+                                <td>Total Debt <span id="totalBalanceDue"></span></td>
+                                <td>Total Minimum Payment <span id="totalMinimumPayment"></span></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="left-over-income">
+                        <!-- <button class="btn btn-outline-primary" onclick="applyLeftOver()">Left Over Income</button> -->
+                    </div>
+                    
+                    <div class="snowball-list" id="debtSnowballOrder">
+                        <h2>Snowball List</h2>
 
-    <div>
-        <h2>Your Household Income</h2>
-        <input type="number" id="householdIncome" placeholder="0">
-    </div>
+                        <!-- Snowball table to display sorted debts -->
+                        <table class="snowball-table">
+                            <thead>
+                                <tr>
+                                    <th>Debt Name</th>
+                                    <th>Remaining Balance</th>
+                                    <th>Interest Next Month</th>
+                                    <th>Next Minimum Due Date</th>
+                                    <th>Payoff Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows will be dynamically populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <!-- <div>
-        <h2>Additional Payment</h2>
-        <input type="number" id="additionalPayment" placeholder="0">
-    </div> -->
-
-    <table id="debtTable">
-        <thead>
-            <tr>
-                <th>Debt Type</th>
-                <th>Interest Rate (%)</th>
-                <th>Balance ($)</th>
-                <th>Minimum Payment ($)</th>
-                <th>Due Date Day</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Table rows will be dynamically added here -->
-        </tbody>
-        <div class="text-end">
-            <button class="save-all-button" onclick="saveAllInputs()">Save All</button>
-            <button class="add-debt-button" onclick="addDebtRow()">Add Debt</button>
-        </div>
-    </table>
-    <div class="snowball-order">
-        <h2>Debt Payoff Order (Snowball Method)</h2>
-        <ol id="debtSnowballOrder"></ol>
-    </div>
-
-    <script>
-        // Initialize debt data if not present in localStorage
-        var debtData = JSON.parse(localStorage.getItem("debtManagementData")) || {
-            debts: [],
-            householdIncome: 0,
-            additionalPayment: 0
-        };
-
-        // Function to save all form inputs to local storage and update results
-        function saveAllInputs() {
-            updateDebtDataFromInputs();
-            // localStorage.setItem("debtManagementData", JSON.stringify(debtData));
-            calculateDebtPayoffOrder();
-            alert("All form inputs saved to local storage and results updated!");
-        }
-
-        // Function to update debt data from form inputs
-        function updateDebtDataFromInputs() {
-            var table = document.getElementById("debtTable");
-            debtData.debts = [];
-
-            for (var i = 1; i < table.rows.length; i++) {
-                var row = table.rows[i];
-                var debt = {
-                    debtType: row.cells[0].querySelector("input").value,
-                    interestRate: row.cells[1].querySelector("input").value,
-                    balance: row.cells[2].querySelector("input").value,
-                    minPayment: row.cells[3].querySelector("input").value,
-                    dueDate: row.cells[4].querySelector("input").value
-                };
-                debtData.debts.push(debt);
-            }
-
-            debtData.householdIncome = document.getElementById("householdIncome").value;
-            debtData.additionalPayment = document.getElementById("additionalPayment").value;
-        }
-
-        // Function to populate debt table from debtData
-        function populateDebtTable() {
-            var table = document.getElementById("debtTable").querySelector("tbody");
-            table.innerHTML = "";
-
-            debtData.debts.forEach(function(debt, index) {
-                var row = table.insertRow();
-                row.insertCell(0).innerHTML = `<input type="text" class="edit-input" value="${debt.debtType}">`;
-                row.insertCell(1).innerHTML = `<input type="number" class="edit-input" value="${debt.interestRate}" step="0.01">`;
-                row.insertCell(2).innerHTML = `<input type="number" class="edit-input" value="${debt.balance}" step="0.01">`;
-                row.insertCell(3).innerHTML = `<input type="number" class="edit-input" value="${debt.minPayment}" step="0.01">`;
-                row.insertCell(4).innerHTML = `<input type="text" class="edit-input" value="${debt.dueDate}">`;
-                row.insertCell(5).innerHTML = `<button onclick="editRow(${index})">Edit</button><button onclick="deleteRow(${index})">Delete</button>`;
-            });
-        }
-
-        // Function to add a new debt row to the table
-        function addDebtRow() {
-            var table = document.getElementById("debtTable").querySelector("tbody");
-            var row = table.insertRow();
-            var cellCount = table.rows[0].cells.length;
-
-            for (var i = 0; i < cellCount - 1; i++) {
-                var cell = row.insertCell(i);
-                var defaultValue = (i === 1 || i === 2 || i === 3) ? "0" : "";
-                cell.innerHTML = `<input type="${i === 1 || i === 2 || i === 3 ? 'number' : 'text'}" class="edit-input" value="${defaultValue}" step="0.01">`;
-            }
-            row.insertCell(cellCount - 1).innerHTML = `<input type="text" class="edit-input">`;
-            row.insertCell(cellCount).innerHTML = `<button onclick="saveRow(${debtData.debts.length})">Save</button>`;
-        }
-
-        // Function to edit a debt row
-        function editRow(index) {
-            var table = document.getElementById("debtTable").querySelector("tbody").rows[index];
-            var cells = table.cells;
-            for (var i = 0; i < cells.length - 1; i++) {
-                var input = cells[i].querySelector("input");
-                input.removeAttribute("readonly");
-            }
-            cells[cells.length - 1].innerHTML = `<button onclick="saveRow(${index})">Save</button>`;
-        }
-
-        // Function to save a debt row
-        function saveRow(index) {
-            var table = document.getElementById("debtTable").querySelector("tbody").rows[index];
-            var cells = table.cells;
-            for (var i = 0; i < cells.length - 1; i++) {
-                var input = cells[i].querySelector("input");
-                input.setAttribute("readonly", true);
-            }
-            cells[cells.length - 1].innerHTML = `<button onclick="editRow(${index})">Edit</button><button onclick="deleteRow(${index})">Delete</button>`;
-            saveAllInputs(); // Save all inputs after saving a row
-        }
-
-        // Function to delete a debt row
-        function deleteRow(index) {
-            debtData.debts.splice(index, 0);
-            saveAllInputs(); // Save all inputs after deleting a row
-        }
-
-        // Function to calculate and display debt payoff order
-        function calculateDebtPayoffOrder() {
-            var sortedDebts = debtData.debts.slice().sort(function(a, b) {
-                return a.balance - b.balance;
-            });
-
-            var orderList = document.getElementById("debtSnowballOrder");
-            orderList.innerHTML = "";
-
-            var totalInterestPaid = 0;
-            sortedDebts.forEach(function(debt) {
-                totalInterestPaid += (debt.balance * debt.interestRate / 100);
-            });
-
-            sortedDebts.forEach(function(debt, index) {
-                var listItem = document.createElement("li");
-                var payoffDate = calculatePayoffDate(debt.balance, debt.minPayment, debt.interestRate);
-                listItem.textContent = `${index + 1}. ${debt.debtType} - Payoff Date: ${payoffDate}, Total Interest Paid: $${totalInterestPaid.toFixed(2)}`;
-                orderList.appendChild(listItem);
-            });
-        }
-
-        // Function to calculate payoff date based on balance, minimum payment, and interest rate
-        function calculatePayoffDate(balance, minPayment, interestRate) {
-            var months = 0;
-            var currentBalance = balance;
-            while (currentBalance > 0) {
-                var interest = currentBalance * (interestRate / 100 / 12);
-                currentBalance = currentBalance + interest - minPayment;
-                months++;
-            }
-            var today = new Date();
-            var payoffDate = new Date(today.getFullYear(), today.getMonth() + months, today.getDate());
-            return `${payoffDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
-        }
-
-        // Initialize the page
-        populateDebtTable();
-        document.getElementById("householdIncome").value = debtData.householdIncome;
-        document.getElementById("additionalPayment").value = debtData.additionalPayment;
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="../js/snowball.js"></script>
 </body>
 </html>

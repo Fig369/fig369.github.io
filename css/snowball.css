@@ -5,7 +5,7 @@ table {
     margin-bottom: 20px;
 }
 table, th, td {
-    border: 1px solid #ccc;
+    border: 1px solid #ccc !important;
 }
 th, td {
     padding: 10px;
@@ -53,4 +53,9 @@ th, td {
 }
 .snowball-order {
     margin-top: 20px;
+}
+
+.ui-datepicker-year
+{
+ display:none;   
 }
